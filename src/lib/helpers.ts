@@ -1,76 +1,38 @@
-export function trimText(input: string, maxLength: number = 100): string {
-  if (input.length <= maxLength) return input;
-  return input.substring(0, maxLength - 3) + "...";
-}
+---
+import { getCurrentTimeInIST, formatTimeForIST } from "../lib/helpers";
+import Card from "./Card/index.astro";
+---
 
-export function getCurrentTimeInIST(): Date {
-  // Create a date object with the current UTC time
-  const now = new Date();
+<script>
+  import { onCleanup, onMount } from "solid-js";
 
-  // Convert the UTC time to Indian Standard Time (IST)
-  const offsetIST = 5.5; // IST is UTC+5:30
-  now.setMinutes(now.getUTCMinutes() + offsetIST * 60);
+  let interval;
 
-  return now;
-}
+  function updateClock() {
+    const timeDisplay = document.getElementById("timeDisplay");
+    const now = getCurrentTimeInIST(); // Use correct function
 
-export function formatTimeForIST(date: Date): string {
-  const options: Intl.DateTimeFormatOptions = {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true, // 12-hour format with AM/PM
-    timeZone: "Asia/Kolkata",
-  };
+    if (timeDisplay) {
+      timeDisplay.textContent = formatTimeForIST(now);
+      timeDisplay.setAttribute("datetime", now.toISOString());
+    }
+  }
 
-  let formattedTime = new Intl.DateTimeFormat("en-US", options).format(date);
-  formattedTime += " IST"; // Append IST time zone
-
-  return formattedTime;
-}
-
-export function getCurrentTimeInItaly(): Date {
-  // Create a date object with the current UTC time
-  const now = new Date();
-
-  // Convert the UTC time to Italy's time
-  const offsetItaly = 2; // Italy is in Central European Summer Time (UTC+2), but you might need to adjust this based on Daylight Saving Time
-  now.setHours(now.getUTCHours() + offsetItaly);
-
-  return now;
-}
-
-export function formatTimeForItaly(date: Date): string {
-  const options: Intl.DateTimeFormatOptions = {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true, // This will format the time in 12-hour format with AM/PM
-    timeZone: "Europe/Rome",
-  };
-
-  let formattedTime = new Intl.DateTimeFormat("en-US", options).format(date);
-  formattedTime += " CET"; // Append CET time zone
-
-  return formattedTime;
-}
-
-export function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  onMount(() => {
+    interval = setInterval(updateClock, 1000);
   });
-}
 
-export const LINKS = {
-  github: "https://github.com/akashrajgm",
-  linkedin: "https://www.linkedin.com/in/g-m-akash-raj-a35860275/",
-  email: "akashrajgm68@gmail.com", // Fixed email format (removed "<")
-};
+  onCleanup(() => {
+    clearInterval(interval);
+  });
+</script>
 
-export const loaderAnimation = [
-  ".loader",
-  { opacity: [1, 0], pointerEvents: "none" },
-  { easing: "ease-out" },
-];
+<Card colSpan="lg:col-span-2" rowSpan="md:row-span-2" title="Time Zone">
+  <time
+    datetime=""
+    id="timeDisplay"
+    class="text-2xl xl:text-5xl xl:whitespace-nowrap w-50 xl:w-100 h-[calc(100%-28px)] font-serif flex justify-center items-center"
+  >
+    {formatTimeForIST(getCurrentTimeInIST())} <!-- Use correct function names -->
+  </time>
+</Card>
