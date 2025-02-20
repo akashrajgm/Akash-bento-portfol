@@ -1,25 +1,54 @@
----
-import { getCurrentTimeInIST, formatTimeForIST } from "../lib/helpers";
-import Card from "./Card/index.astro";
-
-let timeDisplay;
-
-function updateClock() {
-  const now = getCurrentTimeInIST();
-  if (timeDisplay) {
-    timeDisplay.textContent = formatTimeForIST(now);
-    timeDisplay.setAttribute("datetime", now.toISOString());
-  }
+export function trimText(input: string, maxLength: number = 100): string {
+  if (input.length <= maxLength) return input;
+  return input.substring(0, maxLength - 3) + "...";
 }
 
-setInterval(updateClock, 1000);
----
+export function getCurrentTimeInIST(): Date {
+  const now = new Date();
+  return new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+}
 
-<Card colSpan="lg:col-span-2" rowSpan="md:row-span-2" title="Time Zone">
-  <time
-    id="timeDisplay"
-    class="text-2xl xl:text-5xl xl:whitespace-nowrap w-50 xl:w-100 h-[calc(100%-28px)] font-serif flex justify-center items-center"
-  >
-    {formatTimeForIST(getCurrentTimeInIST())}
-  </time>
-</Card>
+export function formatTimeForIST(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+    timeZone: "Asia/Kolkata",
+  }).format(date) + " IST";
+}
+
+export function getCurrentTimeInItaly(): Date {
+  const now = new Date();
+  return new Date(now.toLocaleString("en-US", { timeZone: "Europe/Rome" }));
+}
+
+export function formatTimeForItaly(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: true,
+    timeZone: "Europe/Rome",
+  }).format(date) + " CET";
+}
+
+export function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+export const LINKS = {
+  github: "https://github.com/akashrajgm",
+  linkedin: "https://www.linkedin.com/in/g-m-akash-raj-a35860275/",
+  email: "akashrajgm68@gmail.com",
+};
+
+export const loaderAnimation = [
+  ".loader",
+  { opacity: [1, 0], pointerEvents: "none" },
+  { easing: "ease-out" },
+];
