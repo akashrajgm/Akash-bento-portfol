@@ -5,9 +5,8 @@ import worldData from "../lib/world.json";
 const GlobeComponent = () => {
   let mapContainer: HTMLDivElement | undefined;
 
-  const visitedCountries = [
-    Passionate about exploring new places, though my journey has just begun!
-  ];
+  const visitedCountries = [];
+  const travelMessage = "Passionate about exploring new places, though my journey has just begun!";
 
   onMount(() => {
     if (!mapContainer) return;
@@ -68,6 +67,7 @@ const GlobeComponent = () => {
 
   return (
     <div class="flex flex-col text-white justify-center items-center w-full h-full">
+      <p class="text-lg mb-4">{travelMessage}</p>
       <div class="w-full" ref={mapContainer}></div>
     </div>
   );

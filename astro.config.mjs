@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import sitemap from "@astrojs/sitemap";
 import netlify from "@astrojs/netlify";
 import robotsTxt from "astro-robots-txt";
 import UnoCSS from "@unocss/astro";
@@ -12,15 +11,8 @@ import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://akashrajgm.netlify.app/",
   integrations: [
-    sitemap(),
-    robotsTxt({
-      sitemap: [
-        "https://gianmarcocavallo.com/sitemap-index.xml",
-        "https://gianmarcocavallo.com/sitemap-0.xml",
-      ],
-    }),
+    robotsTxt(), // Keeping robots.txt for potential SEO
     solidJs(),
     UnoCSS({ injectReset: true }),
     icon(),
