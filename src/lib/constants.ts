@@ -1,8 +1,8 @@
+---
 import Card from "./Card/index.astro";
 import Button from "./Button.astro";
 import { LINKS } from "../lib/constants";
 import { Icon } from "astro-icon/components";
-
 ---
 
 <Card colSpan="md:col-span-3" rowSpan="md:row-span-4">
@@ -17,7 +17,7 @@ import { Icon } from "astro-icon/components";
       </div>
       <div class="flex gap-4">
         <!-- GitHub Button -->
-        <a href={LINKS.github} aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer">
+        <a href={`${LINKS.github}`} aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer">
           <Button aria-label="GitHub Profile">
             <Icon name="ri:github-fill" class="h-6" />
             <span class="sr-only">GitHub Profile</span>
@@ -25,7 +25,7 @@ import { Icon } from "astro-icon/components";
         </a>
 
         <!-- LinkedIn Button -->
-        <a href={LINKS.linkedin} aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer">
+        <a href={`${LINKS.linkedin}`} aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer">
           <Button aria-label="LinkedIn Profile">
             <Icon name="ri:linkedin-box-fill" class="h-6" />
             <span class="sr-only">LinkedIn Profile</span>
