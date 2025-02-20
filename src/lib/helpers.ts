@@ -8,7 +8,8 @@ export function getCurrentTimeInIST(): Date {
   return new Date(now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
 }
 
-export function formatTimeForIST(date: Date): string {
+// ✅ Adding the missing function
+export function formatTimeForIndia(date: Date): string {
   return new Intl.DateTimeFormat("en-US", {
     hour: "numeric",
     minute: "2-digit",
@@ -52,3 +53,4 @@ export const loaderAnimation = [
   { opacity: [1, 0], pointerEvents: "none" },
   { easing: "ease-out" },
 ];
+ 
