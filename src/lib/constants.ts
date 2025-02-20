@@ -1,8 +1,8 @@
 ---
-import Card from "./Card/index.astro";
-import Button from "./Button.astro";
-import { LINKS } from "../lib/constants"; // ✅ Ensure correct import
-import { Icon } from "astro-icon/components";
+import Card from ("./Card/index.astro");
+import Button from ("./Button.astro");
+import { LINKS } from ("../lib/constants"); // ✅ Ensure correct import
+import { Icon } from ("astro-icon/components");
 ---
 
 <Card class="md:col-span-3 md:row-span-4"> <!-- ✅ No colSpan prop -->
