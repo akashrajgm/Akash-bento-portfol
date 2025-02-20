@@ -1,10 +1,11 @@
+---
 import Card from "./Card/index.astro";
 import Button from "./Button.astro";
-import { LINKS } from "../lib/constants";
+import { LINKS } from "../lib/constants"; // ✅ Ensure correct import
 import { Icon } from "astro-icon/components";
 ---
 
-<Card class="md:col-span-3 md:row-span-4">
+<Card class="md:col-span-3 md:row-span-4"> <!-- ✅ No colSpan prop -->
   <div class="flex w-full h-full">
     <div class="flex flex-col justify-between md:max-h-[300px] gap-4">
       <div class="flex flex-col h-full">
